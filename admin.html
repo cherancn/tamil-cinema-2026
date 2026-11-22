@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Admin: Tamil Cinema 2026</title>
+<style>
+:root{--bg:#eef0f6;--panel:#fff;--ink:#1b1b3a;--mute:#6b6e8a;--line:#d6d9e6;--bad:#c2263b;--ok:#0f8a6d;color-scheme:light dark}
+@media(prefers-color-scheme:dark){:root{--bg:#12121f;--panel:#1d1d31;--ink:#f1f1fa;--mute:#9a9dbb;--line:#33344f;--bad:#ff6b7f;--ok:#3fd0a9}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:18px 14px 60px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:19px;margin:22px 0 8px}
+p{color:var(--mute);margin:4px 0 12px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px}
+input,button{font:inherit;color:inherit}
+input{padding:10px 12px;border:2px solid var(--line);border-radius:8px;background:var(--bg);width:100%;max-width:320px}
+button{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:8px 14px;cursor:pointer;font-weight:600}
+button.pri{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button.del{color:var(--bad);border-color:var(--bad);padding:5px 11px;font-size:14px}
+button.res{color:var(--ok);border-color:var(--ok);padding:5px 11px;font-size:14px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+ul{list-style:none;margin:0;padding:0}
+li{display:flex;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--line)}
+li:first-child{border-top:0}
+li div{flex:1;min-width:0}li b{display:block;overflow-wrap:anywhere}li small{color:var(--mute)}
+#msg{min-height:22px;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Site admin</h1>
+<p>Delete junk films that visitors added. Deleted names can't be added again and are left out of Community picks.</p>
+
+<div class="panel" id="login">
+<form class="row" id="lf">
+<input type="password" id="pw" placeholder="Admin password" autocomplete="current-password" aria-label="Admin password">
+<button class="pri" type="submit">Open</button>
+</form>
+</div>
+
+<div id="main" hidden>
+<div class="row"><button id="ref">Refresh</button><button id="rc">Recount votes</button><button id="out">Lock</button></div>
+<p id="msg" role="status"></p>
+<h2>Films added by visitors <small id="n"></small></h2>
+<div class="panel"><ul id="films"></ul></div>
+<h2>Deleted names</h2>
+<div class="panel"><ul id="hidden"></ul></div>
+</div>
+</div>
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)},key="";
+try{key=sessionStorage.getItem("tc26-admin")||""}catch(e){}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function msg(m){$("#msg").textContent=m}
+function call(body){return fetch("/api/films",{method:"POST",headers:{"Content-Type":"application/json","x-admin-key":key},body:JSON.stringify(body)})
+.then(function(r){return r.json().catch(function(){return{}}).then(function(d){if(!r.ok)throw new Error(d.error||"Error "+r.status);return d})})}
+function load(){msg("Loading…");
+fetch("/api/films?admin=1",{headers:{"x-admin-key":key},cache:"no-store"}).then(function(r){return r.json()}).then(function(d){
+var f=(d.films||[]).slice().sort(function(a,b){return(b.at||0)-(a.at||0)});
+$("#n").textContent="("+f.length+")";
+$("#films").innerHTML=f.length?f.map(function(x){return'<li><div><b>'+esc(x.t)+'</b><small>'+esc(x.m)+' 2026 · added '+(x.at?new Date(x.at).toLocaleString():"")+'</small></div><button class="del" data-del="'+esc(x.k)+'">Delete</button></li>'}).join(""):'<li><small>None yet.</small></li>';
+var h=d.hidden||[];
+$("#hidden").innerHTML=h.length?h.map(function(k){return'<li><div><b>'+esc(k)+'</b></div><button class="res" data-res="'+esc(k)+'">Allow again</button></li>'}).join(""):'<li><small>None.</small></li>';
+msg("")}).catch(function(){msg("Couldn’t load the list.")})}
+function open(){$("#login").hidden=true;$("#main").hidden=false;load()}
+$("#lf").addEventListener("submit",function(e){e.preventDefault();key=$("#pw").value;
+call({action:"check"}).then(function(){try{sessionStorage.setItem("tc26-admin",key)}catch(e){}open()}).catch(function(e){alert(e.message)})});
+$("#out").addEventListener("click",function(){try{sessionStorage.removeItem("tc26-admin")}catch(e){}location.reload()});
+$("#ref").addEventListener("click",load);
+$("#rc").addEventListener("click",function(){msg("Recounting…");call({action:"recount"}).then(function(d){msg("Recounted "+d.n+" submissions.")}).catch(function(e){msg(e.message)})});
+document.addEventListener("click",function(e){
+var d=e.target.closest("[data-del]"),r=e.target.closest("[data-res]");
+if(d){d.disabled=true;call({action:"delete",k:d.dataset.del}).then(function(){msg("Deleted.");load()}).catch(function(e){d.disabled=false;msg(e.message)})}
+if(r){r.disabled=true;call({action:"restore",k:r.dataset.res}).then(function(){msg("Allowed again.");load()}).catch(function(e){r.disabled=false;msg(e.message)})}});
+if(key)call({action:"check"}).then(open).catch(function(){key=""});
+})();
+</script>
+</body>
+</html>
