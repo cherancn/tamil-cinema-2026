@@ -101,7 +101,7 @@ ul{list-style:none;margin:0;padding:0}
 </header>
 
 <nav class="langs" aria-label="Choose a film industry">
-<a href="/" data-l="ta">Tamil</a><a href="/?lang=te" data-l="te">Telugu</a><a href="/?lang=ml" data-l="ml">Malayalam</a><a href="/?lang=kn" data-l="kn">Kannada</a><a href="/?lang=hi" data-l="hi">Hindi</a><a href="/?lang=en" data-l="en">Hollywood</a>
+<a href="/" data-l="all">All languages</a><a href="/?lang=ta" data-l="ta">Tamil</a><a href="/?lang=te" data-l="te">Telugu</a><a href="/?lang=ml" data-l="ml">Malayalam</a><a href="/?lang=kn" data-l="kn">Kannada</a><a href="/?lang=hi" data-l="hi">Hindi</a><a href="/?lang=en" data-l="en">Hollywood</a>
 </nav>
 <div class="grid">
 <section class="panel search" aria-label="Find films">
@@ -139,45 +139,51 @@ Aug:"DC|G.D.N|Photographer|Magudam|Vishwanath & Sons|Modha Rathri|Pyaar Prema Ka
 Sep:"Immortal|Mandaadi|Sardar 2|Enna Vilai|Sandakari|Beep|Paavai|The Dark Heaven|Dorothy|Lenin Pandiyan|Meesaya Murukku 2|The Grand Master",
 Oct:"Baththa|Yezhu Kadal Yezhu Malai|Anbil Avan|Sigma|Jailer 2|Appa Kutty|Irandu Vaanam",
 Nov:"Mookuthi Amman 2|Moonwalk|Scene|Om|Sathyavan Savithiri"}},te:{n:"Telugu",D:{"Jan": "Psych Siddhartha|Madham|Sahakutumbaanaam|Vanaveera|Ghantasala: The Great|Nilakanta|The RajaSaab|Silent Screams|Mana Shankara Vara Prasad Garu|Bhartha Mahasayulaku Wignyapthi|Anaganaga Oka Raju|Nari Nari Naduma Murari|Cheekatilo|Devagudi|Dhrutarashtrudu|Om Shanti Shanti Shantihi|Jagannath|Trimukha|Zamana", "Feb": "Barabar Premistha|Blood Roses|Dakshina Kali|Erracheera|Euphoria|Honey|Laggam Time|Operation Padma|Sri Chidambaram Garu|Sumathi Sathakam|1+1 Offer|Amaravathiki Aahvanam|Funky|Nilave|Sky|Couple Friendly|Seetha Payanam|Hey Balwanth|Nawab Cafe|Trishanku|Son Of|Uttutta Herolu|Vishnu Vinyasam", "Mar": "Mension House Mallesh|Mrithyunjay|Sampradayini Suppini Suddapoosani|S Saraswathi|Repu Udayam 10 Gantalaku|Ustaad Bhagat Singh|Band Melam|Lechindi Mahila Lokam|Suyodhana", "Apr": "Biker|Raakaasa|Suvarna|Dacoit: A Love Story|Diamond Dacoit|Bad Boy Karthik|Gaali|Papam Prathap|Therachaapa|Thimmarajupalli TV|Rich Kid|Gedela Raju Kakinada Taluka|Paramapadha Sopanam|Sugriva", "May": "Gaayapadda Simham|Jetlee|Godari Gattupaina|M4M: Motive for Murder|Razor|Sathi Leelavathi|Vidhi Geesina V Chitram|Arey Apandra|Dooradarshini|Harudu|Mr. Work From Home|First Time|Purushaha|Ramani Kalyanam|Ugly Story|Trikala|Mareechika|Sandigdham", "Jun": "Peddi|Kotha Malupu|Police Complaint|Sing Geetham|Deewana|LGBT: A Legal Battle|Maa Inti Bangaaram|Transfer Trimurthulu|Risk|Gossip", "Jul": "Nagabandham|Rao Bahadur|Srinivasa Mangapuram|Lenin", "Aug": "Irumudi|Bhogi", "Sep": "Ranabaali", "Oct": "Aadarsha Kutumbam"}},ml:{n:"Malayalam",D:{"Jan": "Appuram|Poovu|Velleppam|Pennu Case|Njaan Karnan 2|Randam Mukham|Kanimangalam Kovilakam|Pushpangadante Onnam Swayamvaram|Rudra|Oru Wayanadan Pranayakadha|Soochana|Chatha Pacha|Magic Mushrooms|Baby Girl|Pazhuthu|Sheshippu|Valathu Vashathe Kallan|Christina|Prakambanam", "Feb": "Aashaan|Anomie|Ashakal Aayiram|Ithaanu Friendship|Karuthal|Madhanamoham|Shukran|The Late Kunjappa|Ragu Ram|AT: Welcome to the Dark Side|Ee Thani Niram|Juniors Journey|Koodothram|Naalpathukalile Pranayam|Pennum Porattum|Spa|Sukhamano Sukhamanu|Moothashari|Pupa|Masthishka Maranam|Iniyum|Ente Jeevitha Nombaram|ICU|KKK Moonnu Raja|Priya Puthren|School Chale Hum|2 BHK", "Mar": "Sambhavam Adhyayam Onnu|Faces|Merry Christmas|Pinvaathil|Eric|Butterfly Girl 85|Veri|Iravan|Aaru Aanugal|Bernard|Ponnapurathu Yakshi|Aadu 3|Bhishmar|Prathichaya|Kalyanamaram|Derby|Grahanam 2.0", "Apr": "Vaazha II: Biopic of a Billion Bros|Pagida Kali|Mohiniyattam|Oru Durooha Saahacharyathil|Kuvi|Pallichattambi|Thala|Madhuvidhu|Achappa's Album|Dark Tracking|Iruniram|Kaalam Paranja Kadha|Kidilam Paru", "May": "Patriot|Aval|Dridam|Revolver Rinko|Ankam Attahasam|Athiradi|Swachanthamruthyu|Sudhipuranam|Drishyam 3|Dose|Thirakkinidayil Alpaneram|Cold|Kattalan|Karakkam|Dr. Bennat|Paithalattam|Kirata|Aaahladam", "Jun": "Mollywood Times|Prathirodham|Manal Pakshikal|Peeli|Normal|Kolahalamedu|Secret of Kalinga|Balan: The Boy|Sathyathil Sambhavichathu|Chinna Chinna Aasai|Aadi Snehathinte Virunnu Mesha|Ananthan Kaadu|Uyir|Choott|Lady in the Wings", "Jul": "Aroopi|Bolagolam|Kla Kla Klee Klee Nazriya Thirinjunokki|Vadu: The Scar|Velolthsavam|Friday Trip|Thee Puka Charam|I, Nobody|Daayam|Mazara|Oru Vadakkan Velicham|Varavu|Antappante Athbutha Pravarthikal|Achyuta Avataaram|Rotten Society|Maharaja Hostel|Lurk|Triple Decker|Pluto|Unmadham|Kandan", "Aug": "Thudakkam|Karimbadam|Vivaah|Madhuramee Jeevitham|Aali|Khalifa: The Ruler|Maayunnu, Maarivarayunnu, Nisvaasangalil...|Bethlehem Kudumba Unit|The Steering", "Sep": "I'm Game|Pradhama Drishtiya Kuttakkar|Aasha|Ozhiyathe|Arayanum Amarakkarum|It's a Medical Miracle|Daivathan Kunnu|Law and Order|Ottam Thullal|Dhoomakethu|Aaram|Amanushikam", "Oct": "Titans|Avarachan & Sons"}},kn:{n:"Kannada",D:{"Jan": "Shivaleela|Theertharoopa Thandeyavarige|The Ice|Jaganmathe Akkamahadevi|Maazar|Surya: The Power of Love|Bharathi Teacher|Landlord|Cult|Amruthaanjan|Bose|Chowkidar|Howddo Huliya|Mavuta|Raktha Kashmira|Seat Edge|Sri Jagannatha Dasaru: Part 2|Valavaara|Vikalpa", "Feb": "Bayakegalu Beruridaga|Gharga|JC: The University|Karikaada|Katle|Nenapugala Maathu Madhura|Non Veg|Rajakreede|Rakkasapuradhol|Sarkari Shale H8|Sukhibhava|After Operation London Cafe|Daiva|Marali Manasaagide|Star|Maggi Pusthaka|Rama and Ramu|Alpha|Doddanna Puttanna|February 30|Maarnami|Mixing Preethi|Sarala Subbarao|Second Case of Seetharam|Suri Anna|Hayagrriva|High Voltage Rakshak|Kanna Muchhe|Super Hit|The Rise of Ashoka|Veera Kambala", "Mar": "Antaryaami|Gorgeous Rascal|Jayakrishna|Kanavarike|Majestic 2|Neeli|Oreo|Pancha Ratnagalu|Shesha 2016|Darji|Kaadina Dari|Love Mocktail 3|Ayudha|Chamayya S/o Ramachari|Janmadathe|Yava Mohana Murali Kareyitu", "Apr": "Aparichithe|First Night With Devva|Naanu Karunakara|Premi|Psychic|Simhapuriya Simha|Vidhi|Calendar|Gangs of UK|Kaada|Peter|Terror|Whispers of the River|Bengaluru Inn|Goggayya|Kendada Seragu|Elra Kaaleliyatte Kaala|Ludo|Puneeth Nivasa|Sankeerthana|KD: The Devil", "May": "Dhruti|Loop|Mathe Male Hoyyuthide|Operation D|Lo Naveena|My Name Is KD|Sherr|Shikhandi|Asurana Kaiyalli Parijatha|Kuchuku|Lockdown|Makkala Sainya|Manga Maaya|Ugra Mardhini|September 21|Gajendra C/O Doddarasinakere", "Jun": "Alexander|Mango Pachcha|Abhyanjana|Kshame Irali Thande|Maddane|Mruthyudevate|Uttara|Dodmansa|Educated Bulls|Kaalaghatta|Urabba|Balaramana Dinagalu|Moda Kavida Vaathavarana|Panchamukhi", "Jul": "Aparadhi Nanalla|Deadly Killer|Graamaayana|Nam Kaaldal Hingirlilla Bidi|Love Seasons|Beauty|Boys Never Compromise|Mother Promise|Rakky|Shri Krishna|Devi|Father's Day|Sarvantharyami|Karavali|Jolly|Sarkari Nyaya Bele Angadi|Shreemati Sindoora|Shri Ramarajya|Tadviruddha", "Aug": "Life Today|Akshara|Ayogya 2|Boss|Detective Teekshana|Picture|Chargesheet 03-08|Chikkavaru Konaralla|Bhagyashaali|Brahmakamala|Jaga Mecchida Maga|Toxic", "Sep": "A Date|Life Ellind Ellige|America America 2|Namma Range Rover|Saalagaarara Sahakara Sangha|Video", "Oct": "Pinaka|Bail"}},hi:{n:"Hindi",D:{"Jan": "Ikkis|Azad Bharath|Rahu Ketu|Happy Patel: Khatarnak Jasoos|Bihu Attack|One Two Cha Cha Chaa|Safia/Safdar|Border 2|Gandhi Talks|Human Cocaine|Mayasabha – The Hall of Illusion|Mardaani 3", "Feb": "Vadh 2|Bhabiji Ghar Par Hain! Fun on the Run|Paro Pinaki Ki Kahani|Tu Yaa Main|O'Romeo|Shatak: Sangh Ke 100 Varsh|Assi|Do Deewane Seher Mein|Kennedy|The Kerala Story 2|Accused|Nukkad Naatak", "Mar": "Subedaar|Charak: Fair of Faith|Na Jaane Kaun Aa Gaya|Jab Khuli Kitaab|Kissa Court Kachehari Ka|Ramyaa|Dhurandhar: The Revenge", "Apr": "Dacoit: A Love Story|Broken Harmony|Candy and the Pizza Ggirl|Everybody Loves Sohrab Handa|Toaster|Bhooth Bangla|Ginny Wedss Sunny 2|Mercy", "May": "Raja Shivaji|Ek Din|Pankh Hote To Udd Jate|Krishnavataram Part 1: The Heart|Main Actor Nahin Hoon|Daadi Ki Shaadi|Dug Dug|Pati Patni Aur Woh Do|Kartavya|IIZ: Indian Institute of Zombies|Aakhri Sawal|Chand Mera Dil|System|September 21|Teesri Begum|Rajni Ki Baraat|The Great Grand Superhero|Krishna Aur Chitthi|Jeena Dil Se|Obsess|Shree Baba Neeb Karori Maharaj|Return of the Jungle", "Jun": "Maa Behen|Bandar|Hai Jawani Toh Ishq Hona Hai|Main Vaapas Aaunga|Haunted 3D: Echoes of the Past|Governor|Bharat Bhhagya Viddhaata|The Narmada Story|Heer Sara|Cocktail 2|Samarpit: Father's Love|Hum Angrezon Ke Zamane Ke Jailor Hai|Welcome to the Jungle|Navya Chakra – Psycon World|Tera Mera Nata", "Jul": "Baby Do Die Do|Alpha|Satluj|Dhamaal 4|Ikka|Rahun Main Tere Rubaru|The India Story|Uttar Da Puttar|Tera Yaar Hoon Main|Dulhaniya Le Aaeegi|Indrajaal|Max, Min & Meowzaki|Bhai Tera Star Hai|The Bose Files: Sach Ya Sazish|Dil Deewana Ho Gaya", "Aug": "Aryabhatt Ka Zero|Ohh My Dog|Hanuman Ansh|Jumper|Awarapan 2|Batwara 1947|Harrd Disk|Dial 1975|Babita Singh Reporting", "Sep": "Gandhari|Mirzapur|Jeevan Ya Bheema Con?|Mahaprabhu Jagannath|Cocaine|Haiwaan|Ghamasaan|Last Man in Tower|Vibe|Daayra|Bharat Desh Hai Mera|Om Ka Hari|Lust Stories 3|Khoonta|The Vvaan: Force of the Forrest|Mahakavya Shri Ramayan Katha|Don't Be Shy|Oye Chill Maar|Love Lottery", "Oct": "Drishyam: The Conclusion|Prem Keetanu|Pooja Meri Jaan|Bokshi|Udta Teer|Raftaar|Prahaar: The Untold Story of Ujjwal Nikam|Nayyi Navelli|Little Thomas|Main Na Raha Mera|Pehla Pyaar Doosri Baar|Darsha|Tum Mere Ho", "Nov": "Lakadbaggha 2: The Monkey Business|Ramayana: Part 1|Pratap"}},en:{n:"Hollywood",D:{"Jan": "28 Years Later: The Bone Temple|Greenland 2: Migration|Primate|Mercy|Send Help|The Wrecking Crew", "Feb": "Wuthering Heights|Goat|Crime 101|Scream 7|The Strangers – Chapter 3|Psycho Killer", "Mar": "Hoppers|The Bride!|Project Hail Mary|Ready or Not 2: Here I Come|Reminders of Him|War Machine", "Apr": "The Super Mario Galaxy Movie|Michael|Lee Cronin's The Mummy|The Drama|Mother Mary", "May": "The Devil Wears Prada 2|Mortal Kombat II|The Mandalorian and Grogu|Obsession|Backrooms|The Sheep Detectives|Passenger", "Jun": "Toy Story 5|Supergirl|Masters of the Universe|Disclosure Day|Scary Movie|Jackass: Best and Last", "Jul": "Minions & Monsters|Moana|The Odyssey|Spider-Man: Brand New Day|Evil Dead Burn", "Aug": "Insidious: Out of the Further|Coyote vs. Acme|The Dog Stars|Super Troopers 3|One Night Only", "Sep": "Practical Magic 2|Resident Evil|Tom and Jerry: Forbidden Compass|The Love Hypothesis", "Oct": "Street Fighter|Verity|The Social Reckoning|Clayface|Digger|Other Mommy", "Nov": "The Cat in the Hat|The Hunger Games: Sunrise on the Reaping|I Play Rocky|Ebenezer"}}};
-var LANG=(function(){var q=(location.search.match(/[?&]lang=([a-z]{2})/)||[])[1];if(q&&LANGS[q])return q;return"ta"})();
-var LN=LANGS[LANG].n,D=LANGS[LANG].D,CIN=LANG=="en"?"Hollywood":LN+" Cinema";
-var F=[];Object.keys(D).forEach(function(m){D[m].split("|").forEach(function(t){F.push({id:F.length,t:t,m:m,k:norm(t)})})});
+var LANG=(function(){var q=(location.search.match(/[?&]lang=([a-z]{2,3})/)||[])[1];if(q&&(LANGS[q]||q=="all"))return q;return"all"})();
+var ALL=LANG=="all",LN=ALL?"":LANGS[LANG].n,LW=ALL?"":LN+" ",CIN=ALL?"Cinema":LANG=="en"?"Hollywood":LN+" Cinema";
+var F=[];
+(function(){var items=[],cnt={};(ALL?Object.keys(LANGS):[LANG]).forEach(function(l){var d=LANGS[l].D;Object.keys(d).forEach(function(m){d[m].split("|").forEach(function(t){items.push({t:t,m:m,l:l});cnt[norm(t)]=(cnt[norm(t)]||0)+1})})});
+var mo=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+if(ALL)items.sort(function(a,b){return mo.indexOf(a.m)-mo.indexOf(b.m)});
+items.forEach(function(x){var t=ALL&&cnt[norm(x.t)]>1?x.t+" ("+LANGS[x.l].n+")":x.t;F.push({id:F.length,t:t,m:x.m,l:x.l,k:norm(t)})})})();
 function norm(s){return s.toLowerCase().replace(/[^a-z0-9]+/g," ").trim()}
 function esc(s){return s.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 var $=function(s){return document.querySelector(s)};
 var MAX=10,BK="tamil2026-rank",KEY=LANG=="ta"?BK:BK+"-"+LANG,S={best:[],worst:[]};
-var SITE=CIN+" 2026: Your Best and Worst 10",SURL=((/^https?:$/.test(location.protocol)&&!/claude/.test(location.hostname))?location.origin+"/":"https://tamil-cinema-2026.netlify.app/")+(LANG=="ta"?"":"?lang="+LANG);
+var SITE=CIN+" 2026: Your Best and Worst 10",SURL=((/^https?:$/.test(location.protocol)&&!/claude/.test(location.hostname))?location.origin+"/":"https://tamil-cinema-2026.netlify.app/")+(ALL?"":"?lang="+LANG);
 document.title=SITE;
-var P=LANG!="ta"?{}:{"Jana Nayagan":"ZEE5","Vishwanath & Sons":"Netflix","Jailer 2":"Prime Video","The Grand Master":"Sun NXT","Gandhi Talks":"ZEE5","Dear Radhi":"Sun NXT","Lucky the Superstar":"JioHotstar","Hot Spot 2 Much":"Prime Video","Love Oh Love":"Prime Video","TN 2026":"Prime Video","Manithan Deivamagalam":"Sun NXT"};
+var P=LANG!="ta"&&!ALL?{}:{"Jana Nayagan":"ZEE5","Vishwanath & Sons":"Netflix","Jailer 2":"Prime Video","The Grand Master":"Sun NXT","Gandhi Talks":"ZEE5","Dear Radhi":"Sun NXT","Lucky the Superstar":"JioHotstar","Hot Spot 2 Much":"Prime Video","Love Oh Love":"Prime Video","TN 2026":"Prime Video","Manithan Deivamagalam":"Sun NXT"};
 $("#h1").textContent=CIN+" 2026: your best and worst 10";
 document.querySelectorAll(".langs a").forEach(function(a){if(a.dataset.l===LANG)a.setAttribute("aria-current","page")});
-var PH={ta:"Karuppu, Jailer, Love…",te:"Peddi, RajaSaab, Dacoit…",ml:"Drishyam, Patriot, Aadu…",kn:"Toxic, Karavali, KD…",hi:"Border, Dhurandhar, Ramayana…",en:"Odyssey, Spider-Man, Toy Story…"};
+var PH={all:"Jailer, Peddi, Drishyam, Odyssey…",ta:"Karuppu, Jailer, Love…",te:"Peddi, RajaSaab, Dacoit…",ml:"Drishyam, Patriot, Aadu…",kn:"Toxic, Karavali, KD…",hi:"Border, Dhurandhar, Ramayana…",en:"Odyssey, Spider-Man, Toy Story…"};
 $("#q").placeholder="Try "+PH[LANG];
 var BASE=F.length,ALLM=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 function byK(k){for(var i=0;i<F.length;i++)if(F[i].k===k)return F[i];return null}
-function addFilm(t,m,flag){t=String(t).replace(/\s+/g," ").trim().slice(0,60);var k=norm(t);if(!k)return null;
-if(ALLM.indexOf(m)<0)m="Added";var ex=byK(k);
+function addFilm(t,m,flag,l){t=String(t).replace(/\s+/g," ").trim().slice(0,60);if(!norm(t))return null;
+l=LANGS[l]?l:(ALL?"":LANG);
+var k=norm(t),ex=byK(k);if(ALL&&ex&&l&&ex.l&&ex.l!==l){t=t+" ("+LANGS[l].n+")";k=norm(t);ex=byK(k)}
+if(ALLM.indexOf(m)<0)m="Added";
 if(ex){if(ex.id>=BASE){if(flag=="u")ex.u=true;if(flag=="c")ex.c=true;if(m!="Added"&&ex.m=="Added")ex.m=m}return ex}
-var f={id:F.length,t:t,m:m,k:k};f[flag]=true;F.push(f);return f}
+var f={id:F.length,t:t,m:m,k:k,l:l};f[flag]=true;F.push(f);return f}
 function loadArr(n){try{var a=JSON.parse(localStorage.getItem(KEY+n)||"[]");return Array.isArray(a)?a:[]}catch(e){return[]}}
-loadArr("-custom").slice(0,50).forEach(function(x){if(typeof x=="string")addFilm(x,"Added","c");else if(x&&typeof x.t=="string")addFilm(x.t,x.m,"c")});
-loadArr("-shared").slice(0,1000).forEach(function(x){if(x&&typeof x.t=="string")addFilm(x.t,x.m,"u")});
-function saveC(){try{localStorage.setItem(KEY+"-custom",JSON.stringify(F.filter(function(f){return f.c}).map(function(f){return{t:f.t,m:f.m}})))}catch(e){}}
+loadArr("-custom").slice(0,50).forEach(function(x){if(typeof x=="string")addFilm(x,"Added","c");else if(x&&typeof x.t=="string")addFilm(x.t,x.m,"c",x.l)});
+loadArr("-shared").slice(0,3000).forEach(function(x){if(x&&typeof x.t=="string")addFilm(x.t,x.m,"u",x.l)});
+function saveC(){try{localStorage.setItem(KEY+"-custom",JSON.stringify(F.filter(function(f){return f.c}).map(function(f){return{t:f.t,m:f.m,l:f.l}})))}catch(e){}}
 var pend=null;
 function addBtn(){var v=$("#q").value.trim().replace(/\s+/g," ").slice(0,60);if(!v)return'';if(byK(norm(v)))return'';
 if(pend===v){var cm=ALLM[new Date().getMonth()];
-return '<li class="addf"><b>Add “'+esc(v)+'” for everyone</b><label for="am">Release month</label><select id="am">'+ALLM.map(function(m){return'<option value="'+m+'"'+(m==cm?' selected':'')+'>'+m+' 2026</option>'}).join("")+'</select><button class="btn pri" data-save="1">Add film</button><button class="btn" data-cancel="1">Cancel</button><small>Only add real '+LN+' films released in 2026. Check the spelling first: it will be shown to everyone.</small></li>'}
+return '<li class="addf"><b>Add “'+esc(v)+'” for everyone</b>'+(ALL?'<label for="al">Language</label><select id="al">'+Object.keys(LANGS).map(function(l){return'<option value="'+l+'">'+LANGS[l].n+'</option>'}).join("")+'</select>':'')+'<label for="am">Release month</label><select id="am">'+ALLM.map(function(m){return'<option value="'+m+'"'+(m==cm?' selected':'')+'>'+m+' 2026</option>'}).join("")+'</select><button class="btn pri" data-save="1">Add film</button><button class="btn" data-cancel="1">Cancel</button><small>Only add real '+LW+'films released in 2026. Check the spelling first: it will be shown to everyone.</small></li>'}
 return '<li class="hint">Film missing? <button class="chip" data-custom="1">Add “'+esc(v)+'” as a new film</button></li>'}
 try{var raw=JSON.parse(localStorage.getItem(KEY)||"null");if(raw){["best","worst"].forEach(function(l){var seen={};S[l]=(raw[l]||[]).map(function(x){var f=typeof x=="number"?F[x]:byK(x);return f?f.id:null}).filter(function(i){if(i==null||seen[i])return false;seen[i]=1;return true}).slice(0,MAX)})}}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify({best:S.best.map(function(i){return F[i].k}),worst:S.worst.map(function(i){return F[i].k})}))}catch(e){}}
-function tag(f){return f.c&&!f.u?'Added by you'+(f.m!="Added"?', '+f.m+' 2026':''):f.u?'Added by users, '+f.m+' 2026':f.m+' 2026'+(P[f.t]?', on '+P[f.t]:'')}
+function tag(f){return (ALL&&f.l?LANGS[f.l].n+' · ':'')+(f.c&&!f.u?'Added by you'+(f.m!="Added"?', '+f.m+' 2026':''):f.u?'Added by users, '+f.m+' 2026':f.m+' 2026'+(P[f.t]?', on '+P[f.t]:''))}
 function where(id){var b=S.best.indexOf(id);if(b>-1)return["Best",b+1];var w=S.worst.indexOf(id);if(w>-1)return["Worst",w+1];return null}
 var tt;function toast(m){var t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("on")},2200)}
 
 function renderRes(){
 var q=norm($("#q").value),ul=$("#res");
 $("#cnt").textContent=F.length+" films";
-if(!q){ul.innerHTML='<li class="hint">Start typing to find a film. '+F.length+' '+LN+' releases from 2026 are searchable.</li>';return}
+if(!q){ul.innerHTML='<li class="hint">Start typing to find a film. '+F.length+' '+LW+'releases from 2026 are searchable.'+(ALL?' Tamil, Telugu, Malayalam, Kannada, Hindi and Hollywood.':'')+'</li>';return}
 var m=F.filter(function(f){return f.k.indexOf(q)>-1}).sort(function(a,b){return (b.k.indexOf(q)===0)-(a.k.indexOf(q)===0)||a.t.localeCompare(b.t)});
 if(!m.length){ul.innerHTML='<li class="empty">No film matches “'+esc($("#q").value)+'”. Check the spelling or try a shorter word.</li>'+addBtn();return}
 var h=m.slice(0,25).map(function(f){var w=where(f.id);
@@ -288,13 +294,13 @@ function addCustom(){var v=$("#q").value.trim().replace(/\s+/g," ").slice(0,60);
 if(norm(v).length<2){toast("Type the film's full name.");return}
 var ex=byK(norm(v));if(ex){toast("Already listed: "+ex.t);return}
 pend=v;renderRes();var sel=$("#am");if(sel)sel.focus()}
-function saveFilm(btn){var v=pend,m=$("#am")&&$("#am").value;if(!v||!m)return;
+function saveFilm(btn){var v=pend,m=$("#am")&&$("#am").value,fl=ALL?($("#al")&&$("#al").value):LANG;if(!v||!m||!fl)return;
 var ex=byK(norm(v));if(ex){pend=null;toast("Already listed: "+ex.t);renderRes();return}
 btn.disabled=true;btn.textContent="Adding…";
-var local=function(msg){var f=addFilm(v,m,"c");saveC();pend=null;q.value=f.t;render();renderBrowse();toast(msg)};
-fetch("/api/films?lang="+LANG,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:did(),t:v,m:m})})
+var local=function(msg){var f=addFilm(v,m,"c",fl);saveC();pend=null;q.value=f.t;render();renderBrowse();toast(msg)};
+fetch("/api/films?lang="+fl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:did(),t:v,m:m})})
 .then(function(r){return r.json().catch(function(){return{}}).then(function(d){return{ok:r.ok,d:d}})})
-.then(function(x){if(x.ok&&x.d.film){var f=addFilm(x.d.film.t,x.d.film.m,"u");f.c=false;pend=null;q.value=f.t;cacheShared(f);render();renderBrowse();
+.then(function(x){if(x.ok&&x.d.film){var f=addFilm(x.d.film.t,x.d.film.m,"u",fl);f.c=false;pend=null;q.value=f.t;cacheShared(f);render();renderBrowse();
 toast(x.d.existed?"Someone already added it. Now tap Best or Worst.":"Added for everyone. Now tap Best or Worst.")}
 else if(x.d&&x.d.error&&x.d.error.indexOf("removed")>-1){pend=null;renderRes();toast(x.d.error)}
 else local((x.d&&x.d.error?x.d.error+" ":"")+"Saved on this device only.")})
@@ -304,7 +310,7 @@ var sv=e.target.closest("[data-save]");if(sv)saveFilm(sv);
 if(e.target.closest("[data-cancel]")){pend=null;renderRes()}});
 $("#tw").addEventListener("click",function(){
 if(!S.best.length){toast("Add films to your Best 10 first.");return}
-var t="My top "+LN+" films of 2026:\n"+S.best.slice(0,3).map(function(id,i){return(i+1)+". "+F[id].t}).join("\n")+"\n\nMake your Best and Worst 10:";
+var t="My top "+LW+"films of 2026:\n"+S.best.slice(0,3).map(function(id,i){return(i+1)+". "+F[id].t}).join("\n")+"\n\nMake your Best and Worst 10:";
 var u="https://twitter.com/intent/tweet?text="+encodeURIComponent(t)+"&url="+encodeURIComponent(SURL);
 var w=window.open(u,"_blank","noopener");toast(w?"Opened X. Paste your copied image into the post.":"Pop-up blocked. Allow pop-ups and try again.")});
 $("#theme").addEventListener("click",function(){
@@ -318,8 +324,8 @@ function renderBrowse(){var closed={};br.querySelectorAll("details").forEach(fun
 var nu=F.filter(function(f){return f.u}).length;
 var bh='<h2>All films by month <small>'+F.length+' films</small></h2><p>Can’t remember the exact title? Scan the months, then tap a film to search for it.'+(nu?' Dashed ones were added by users.':'')+'</p>';
 ALLM.forEach(function(m){var fs=F.filter(function(f){return f.m===m});if(!fs.length)return;
-bh+='<details data-m="'+m+'"'+(closed[m]?'':' open')+'><summary>'+MN[m]+'<small>'+fs.length+'</small></summary><div class="chips">'+fs.map(function(f){return '<button class="chip'+(f.u||f.c?' u':'')+'" data-pick="'+f.id+'">'+esc(f.t)+'</button>'}).join("")+'</div></details>'});
-br.innerHTML=bh}
+bh+='<details data-m="'+m+'"'+(closed[m]||(ALL&&!br.dataset.done)?'':' open')+'><summary>'+MN[m]+'<small>'+fs.length+'</small></summary><div class="chips">'+fs.map(function(f){return '<button class="chip'+(f.u||f.c?' u':'')+'" data-pick="'+f.id+'"'+(ALL&&f.l?' title="'+LANGS[f.l].n+'"':'')+'>'+esc(f.t)+'</button>'}).join("")+'</div></details>'});
+br.innerHTML=bh;br.dataset.done=1}
 renderBrowse();
 br.addEventListener("click",function(e){var c=e.target.closest("[data-pick]");if(!c)return;
 pend=null;q.value=F[+c.dataset.pick].t;renderRes();q.scrollIntoView({behavior:"smooth",block:"center"})});
@@ -333,11 +339,11 @@ $("#sub").addEventListener("click",function(){
 if(!S.best.length&&!S.worst.length){toast("Add some films first.");return}
 var t=function(id){return F[id].t};
 fetch("/api/votes?lang="+LANG,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:did(),best:S.best.map(t),worst:S.worst.map(t)})}).then(function(r){if(!r.ok)throw 0;toast("Submitted. Thanks for voting!");loadCom()}).catch(function(){toast("Couldn’t submit right now. Try again later.")})});
-function cacheShared(add){try{var a=loadArr("-shared");if(add&&!a.some(function(x){return x&&norm(x.t)===add.k}))a.push({t:add.t,m:add.m});localStorage.setItem(KEY+"-shared",JSON.stringify(a.slice(-1000)))}catch(e){}}
+function cacheShared(add){try{var a=loadArr("-shared");if(add&&!a.some(function(x){return x&&norm(x.t)===add.k}))a.push({t:add.t,m:add.m,l:add.l});localStorage.setItem(KEY+"-shared",JSON.stringify(a.slice(-1000)))}catch(e){}}
 function loadShared(){fetch("/api/films?lang="+LANG).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
 if(!d||!Array.isArray(d.films))return;var before=F.length;
-d.films.forEach(function(x){if(x&&typeof x.t=="string")addFilm(x.t,x.m,"u")});
-try{localStorage.setItem(KEY+"-shared",JSON.stringify(d.films.map(function(x){return{t:x.t,m:x.m}})))}catch(e){}
+d.films.forEach(function(x){if(x&&typeof x.t=="string")addFilm(x.t,x.m,"u",x.l||LANG)});
+try{localStorage.setItem(KEY+"-shared",JSON.stringify(d.films.map(function(x){return{t:x.t,m:x.m,l:x.l||LANG}})))}catch(e){}
 renderRes();renderBrowse()}).catch(function(){})}
 loadCom();
 loadShared();
