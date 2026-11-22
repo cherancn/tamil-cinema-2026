@@ -5,6 +5,7 @@ import { createHash, timingSafeEqual } from "node:crypto";
 export const config = { path: ["/api/votes", "/api/films"] };
 
 const LANGS = ["ta", "te", "ml", "kn", "hi", "en"];
+const NAMES = { ta: "Tamil", te: "Telugu", ml: "Malayalam", kn: "Kannada", hi: "Hindi", en: "Hollywood" };
 // Tamil keeps the original key names so earlier votes and films stay put.
 const keys = (lang) => {
   const p = lang === "ta" ? "" : lang + "-";
@@ -96,8 +97,15 @@ function isAdmin(req) {
 
 async function votes(req, s, K) {
   if (req.method === "GET") {
-    const [t, f] = await Promise.all([totals(s, K), s.get(K.films, { type: "json" })]);
-    const hidden = new Set((f && f.hidden) || []);
+    const [t, fs] = await Promise.all([
+      totals(s, K),
+      Promise.all((K.all ? LANGS.map(keys) : [K]).map((k) => s.get(k.films, { type: "json" }))),
+    ]);
+    const hidden = new Set();
+    for (const f of fs) for (const h of (f && f.hidden) || []) {
+      hidden.add(h);
+      if (K.all) for (const l of LANGS) hidden.add(h + " " + norm(NAMES[l]));
+    }
     const top = (o) => Object.entries(o)
       .filter(([k]) => !hidden.has(k))
       .map(([, v]) => v)
@@ -130,8 +138,18 @@ async function votes(req, s, K) {
 async function films(req, s, ctx, K) {
   const admin = isAdmin(req);
   if (req.method === "GET") {
+    const wantAdmin = admin && new URL(req.url).searchParams.has("admin");
+    if (K.all) {
+      const out = { films: [], hidden: [] };
+      for (const l of LANGS) {
+        const f = (await s.get(keys(l).films, { type: "json" })) || emptyFilms();
+        for (const x of f.films) out.films.push(wantAdmin ? { ...x, l } : { t: x.t, m: x.m, k: x.k, l });
+        for (const h of f.hidden) out.hidden.push(wantAdmin ? { k: h, l } : h);
+      }
+      return json(wantAdmin ? out : { films: out.films });
+    }
     const f = (await s.get(K.films, { type: "json" })) || emptyFilms();
-    if (admin && new URL(req.url).searchParams.has("admin")) return json(f);
+    if (wantAdmin) return json(f);
     return json({ films: f.films.map(({ t, m, k }) => ({ t, m, k })) });
   }
   if (req.method !== "POST") return err("Method not allowed", 405);
@@ -142,6 +160,7 @@ async function films(req, s, ctx, K) {
 
   if (body.action) {
     if (!admin) return err("Wrong admin password", 401);
+    if (K.all && body.action !== "check" && body.action !== "recount") return err("Pick a language to change films.");
     if (body.action === "check") return json({ ok: true });
     if (body.action === "recount") { const t = await recount(s, K); return json({ ok: true, n: t.n }); }
     const k = norm(body.k || "");
@@ -158,6 +177,7 @@ async function films(req, s, ctx, K) {
     return json({ ok: true, ...out });
   }
 
+  if (K.all) return err("Pick a language for the film.");
   if (typeof body.id !== "string" || !/^[a-z0-9]{6,64}$/i.test(body.id)) return err("Bad id");
   const t = tidy(body.t || ""), k = norm(t), m = body.m;
   if (t.length < 2 || !k) return err("Type the film's name.");
@@ -189,8 +209,8 @@ export default async (req, ctx) => {
   try {
     const url = new URL(req.url);
     const lang = url.searchParams.get("lang") || "ta";
-    if (!LANGS.includes(lang)) return err("Unknown language");
-    const K = keys(lang);
+    if (lang !== "all" && !LANGS.includes(lang)) return err("Unknown language");
+    const K = lang === "all" ? { vote: "all-v-", totals: "all-totals", films: null, all: true } : keys(lang);
     return url.pathname.startsWith("/api/films") ? await films(req, s, ctx, K) : await votes(req, s, K);
   } catch (e) {
     console.error(e);
