@@ -31,7 +31,7 @@ li div{flex:1;min-width:0}li b{display:block;overflow-wrap:anywhere}li small{col
 <body>
 <div class="wrap">
 <h1>Site admin</h1>
-<p>Delete junk films that visitors added. Deleted names can't be added again and are left out of Community picks.</p>
+<p>Delete junk films that visitors added. “Recount votes” recounts the language picked in the dropdown. Deleted names can't be added again and are left out of Community picks.</p>
 
 <div class="panel" id="login">
 <form class="row" id="lf">
@@ -41,7 +41,7 @@ li div{flex:1;min-width:0}li b{display:block;overflow-wrap:anywhere}li small{col
 </div>
 
 <div id="main" hidden>
-<div class="row"><select id="lang" aria-label="Language" style="font:inherit;color:inherit;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:8px 12px"><option value="ta">Tamil</option><option value="te">Telugu</option><option value="ml">Malayalam</option><option value="kn">Kannada</option><option value="hi">Hindi</option><option value="en">Hollywood</option></select><button id="ref">Refresh</button><button id="rc">Recount votes</button><button id="out">Lock</button></div>
+<div class="row"><select id="lang" aria-label="Language" style="font:inherit;color:inherit;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:8px 12px"><option value="all">All languages</option><option value="ta">Tamil</option><option value="te">Telugu</option><option value="ml">Malayalam</option><option value="kn">Kannada</option><option value="hi">Hindi</option><option value="en">Hollywood</option></select><button id="ref">Refresh</button><button id="rc">Recount votes</button><button id="out">Lock</button></div>
 <p id="msg" role="status"></p>
 <h2>Films added by visitors <small id="n"></small></h2>
 <div class="panel"><ul id="films"></ul></div>
@@ -55,28 +55,29 @@ var $=function(s){return document.querySelector(s)},key="";
 try{key=sessionStorage.getItem("tc26-admin")||""}catch(e){}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function msg(m){$("#msg").textContent=m}
-function L(){return $("#lang")?$("#lang").value:"ta"}
-function call(body){return fetch("/api/films?lang="+L(),{method:"POST",headers:{"Content-Type":"application/json","x-admin-key":key},body:JSON.stringify(body)})
+var NM={ta:"Tamil",te:"Telugu",ml:"Malayalam",kn:"Kannada",hi:"Hindi",en:"Hollywood"};
+function L(){return $("#lang")?$("#lang").value:"all"}
+function call(body,lang){return fetch("/api/films?lang="+(lang||L()),{method:"POST",headers:{"Content-Type":"application/json","x-admin-key":key},body:JSON.stringify(body)})
 .then(function(r){return r.json().catch(function(){return{}}).then(function(d){if(!r.ok)throw new Error(d.error||"Error "+r.status);return d})})}
 function load(){msg("Loading…");
 fetch("/api/films?admin=1&lang="+L(),{headers:{"x-admin-key":key},cache:"no-store"}).then(function(r){return r.json()}).then(function(d){
 var f=(d.films||[]).slice().sort(function(a,b){return(b.at||0)-(a.at||0)});
 $("#n").textContent="("+f.length+")";
-$("#films").innerHTML=f.length?f.map(function(x){return'<li><div><b>'+esc(x.t)+'</b><small>'+esc(x.m)+' 2026 · added '+(x.at?new Date(x.at).toLocaleString():"")+'</small></div><button class="del" data-del="'+esc(x.k)+'">Delete</button></li>'}).join(""):'<li><small>None yet.</small></li>';
+$("#films").innerHTML=f.length?f.map(function(x){return'<li><div><b>'+esc(x.t)+'</b><small>'+(x.l?esc(NM[x.l]||x.l)+' · ':'')+esc(x.m)+' 2026 · added '+(x.at?new Date(x.at).toLocaleString():"")+'</small></div><button class="del" data-del="'+esc(x.k)+'" data-l="'+esc(x.l||L())+'">Delete</button></li>'}).join(""):'<li><small>None yet.</small></li>';
 var h=d.hidden||[];
-$("#hidden").innerHTML=h.length?h.map(function(k){return'<li><div><b>'+esc(k)+'</b></div><button class="res" data-res="'+esc(k)+'">Allow again</button></li>'}).join(""):'<li><small>None.</small></li>';
+$("#hidden").innerHTML=h.length?h.map(function(x){var k=typeof x=="string"?x:x.k,l=typeof x=="string"?L():x.l;return'<li><div><b>'+esc(k)+'</b><small>'+esc(NM[l]||l)+'</small></div><button class="res" data-res="'+esc(k)+'" data-l="'+esc(l)+'">Allow again</button></li>'}).join(""):'<li><small>None.</small></li>';
 msg("")}).catch(function(){msg("Couldn’t load the list.")})}
 function open(){$("#login").hidden=true;$("#main").hidden=false;load()}
 $("#lf").addEventListener("submit",function(e){e.preventDefault();key=$("#pw").value;
-call({action:"check"}).then(function(){try{sessionStorage.setItem("tc26-admin",key)}catch(e){}open()}).catch(function(e){alert(e.message)})});
+call({action:"check"},"ta").then(function(){try{sessionStorage.setItem("tc26-admin",key)}catch(e){}open()}).catch(function(e){alert(e.message)})});
 $("#out").addEventListener("click",function(){try{sessionStorage.removeItem("tc26-admin")}catch(e){}location.reload()});
 $("#ref").addEventListener("click",load);$("#lang").addEventListener("change",load);
 $("#rc").addEventListener("click",function(){msg("Recounting…");call({action:"recount"}).then(function(d){msg("Recounted "+d.n+" submissions.")}).catch(function(e){msg(e.message)})});
 document.addEventListener("click",function(e){
 var d=e.target.closest("[data-del]"),r=e.target.closest("[data-res]");
-if(d){d.disabled=true;call({action:"delete",k:d.dataset.del}).then(function(){msg("Deleted.");load()}).catch(function(e){d.disabled=false;msg(e.message)})}
-if(r){r.disabled=true;call({action:"restore",k:r.dataset.res}).then(function(){msg("Allowed again.");load()}).catch(function(e){r.disabled=false;msg(e.message)})}});
-if(key)call({action:"check"}).then(open).catch(function(){key=""});
+if(d){d.disabled=true;call({action:"delete",k:d.dataset.del},d.dataset.l).then(function(){msg("Deleted.");load()}).catch(function(e){d.disabled=false;msg(e.message)})}
+if(r){r.disabled=true;call({action:"restore",k:r.dataset.res},r.dataset.l).then(function(){msg("Allowed again.");load()}).catch(function(e){r.disabled=false;msg(e.message)})}});
+if(key)call({action:"check"},"ta").then(open).catch(function(){key=""});
 })();
 </script>
 </body>
