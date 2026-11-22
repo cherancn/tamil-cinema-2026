@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tamil Cinema 2026: Your Best and Worst 10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef0f6;--panel:#fff;--ink:#1b1b3a;--mute:#6b6e8a;--line:#d6d9e6;--best:#0f8a6d;--worst:#c2263b;--gold:#e8a300;--shadow:0 8px 24px rgba(27,27,58,.18);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12121f;--panel:#1d1d31;--ink:#f1f1fa;--mute:#9a9dbb;--line:#33344f;--best:#3fd0a9;--worst:#ff6b7f;--gold:#ffc83d;--shadow:0 8px 24px rgba(0,0,0,.5);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#12121f;--panel:#1d1d31;--ink:#f1f1fa;--mute:#9a9dbb;--line:#33344f;--best:#3fd0a9;--worst:#ff6b7f;--gold:#ffc83d;--shadow:0 8px 24px rgba(0,0,0,.5);color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.4 "Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:16px 14px 80px}
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+h1{font-size:clamp(26px,6vw,40px);line-height:1.05;margin:0;font-weight:800;letter-spacing:-.02em}
+header p{margin:6px 0 0;color:var(--mute);max-width:46ch}
+.browse{margin-top:14px;border-top:5px solid var(--ink)}
+.browse details{border-top:1px solid var(--line);padding:6px 0}
+.browse summary{cursor:pointer;font-weight:800;font-size:17px;padding:6px 0}
+.browse summary small{color:var(--mute);font-weight:600;font-size:14px;margin-left:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding:4px 0 8px}
+.chip{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:6px 12px;cursor:pointer;font-size:14px;font-weight:600}
+.chip:hover{border-color:var(--gold)}
+.com{margin-top:14px;border-top:5px solid var(--gold)}.com .cols{display:grid;grid-template-columns:1fr;gap:14px}@media(min-width:700px){.com .cols{grid-template-columns:1fr 1fr}}.com h3{margin:0 0 6px;font-size:17px}.com ol{margin:0;padding-left:24px}.com li{padding:4px 0}.com li b{float:right;color:var(--mute)}
+.by{margin:4px 0 0;font-weight:600;color:var(--ink)}
+.ov{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.82);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px}
+.ov img{max-width:100%;max-height:68vh;border-radius:12px;box-shadow:var(--shadow)}
+.ov .row{display:flex;gap:8px}.ov p{color:#d8dae8;margin:0;font-size:14px;text-align:center}
+.tools{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.btn{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:8px 14px;cursor:pointer;font-weight:600}
+.btn:hover{border-color:var(--ink)}
+.btn.pri{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:820px){.grid{grid-template-columns:1.1fr 1fr 1fr;align-items:start}.search{position:sticky;top:12px}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px}
+.panel h2{margin:0 0 2px;font-size:20px;font-weight:800;display:flex;justify-content:space-between;align-items:baseline}
+.panel h2 small{font-weight:600;color:var(--mute);font-size:14px}
+.panel>p{margin:0 0 10px;color:var(--mute);font-size:14px}
+.best{border-top:5px solid var(--best)}.worst{border-top:5px solid var(--worst)}.search{border-top:5px solid var(--gold)}
+input[type=search]{width:100%;padding:12px 14px;border:2px solid var(--line);border-radius:10px;background:var(--bg);font-size:16px}
+input[type=search]:focus{border-color:var(--gold);outline:none}
+ul{list-style:none;margin:0;padding:0}
+#res{margin-top:10px;max-height:52vh;overflow:auto}
+@media(max-width:819px){#res{max-height:40vh}}
+.li{display:flex;align-items:center;gap:8px;padding:8px;border:1px solid var(--line);border-radius:10px;background:var(--panel);margin-bottom:6px;position:relative}
+.li.dragging{opacity:.35}
+.li.before::before{content:"";position:absolute;left:0;right:0;top:-5px;height:3px;border-radius:3px;background:var(--gold)}
+.box.end::after{content:"";display:block;height:3px;border-radius:3px;background:var(--gold)}
+.grip{touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none;padding:6px 4px;color:var(--mute);font-size:18px;line-height:1;letter-spacing:-3px}
+.grip:active{cursor:grabbing}
+.t{flex:1;min-width:0}.t b{display:block;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.t small{color:var(--mute)}
+.rk{width:26px;text-align:center;font-weight:800;font-size:18px}
+.best .rk{color:var(--best)}.worst .rk{color:var(--worst)}
+.add{display:flex;gap:4px}
+.add button,.x{border:1px solid var(--line);background:transparent;border-radius:8px;padding:5px 9px;cursor:pointer;font-size:13px;font-weight:600}
+.add .b{color:var(--best);border-color:var(--best)}.add .w{color:var(--worst);border-color:var(--worst)}
+.add button:disabled{opacity:.35;cursor:default}
+.x{color:var(--mute)}.x:hover{color:var(--worst);border-color:var(--worst)}
+.slot{height:48px;margin-bottom:6px;border:2px dashed var(--line);border-radius:10px;display:flex;align-items:center;padding-left:12px;color:var(--mute);font-size:14px;gap:12px}
+.slot span{font-weight:800;width:26px;text-align:center}
+.box.over{outline:2px dashed var(--gold);outline-offset:3px;border-radius:10px}
+.ghost{position:fixed;z-index:50;pointer-events:none;background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:10px;box-shadow:var(--shadow);font-weight:600;max-width:70vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transform:translate(-50%,-120%)}
+.hint,.empty{color:var(--mute);font-size:14px;padding:8px 2px}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;opacity:0;transition:.2s;pointer-events:none;z-index:60;max-width:90vw}
+#toast.on{opacity:1;transform:translateX(-50%)}
+@media(prefers-reduced-motion:reduce){#toast{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div>
+<h1>Tamil cinema 2026: your best and worst 10</h1>
+<p>Search a film, then drag it into a list or tap Best or Worst. Drag to reorder. Your lists save on this device.</p>
+<p class="by">Created by Jack</p>
+</div>
+<div class="tools">
+<button class="btn pri" id="sub">Submit to community</button>
+<button class="btn" id="share">Copy as text</button>
+<button class="btn pri" id="img">Copy as image</button>
+<button class="btn" id="tw">Post to X</button>
+<button class="btn" id="reset">Clear all</button>
+<button class="btn" id="theme" aria-label="Switch light or dark theme">Theme</button>
+</div>
+</header>
+
+<div class="grid">
+<section class="panel search" aria-label="Find films">
+<h2>Find a film <small id="cnt"></small></h2>
+<p>Type any part of the title.</p>
+<input type="search" id="q" placeholder="Try Karuppu, Jailer, Love…" autocomplete="off" aria-label="Search films">
+<ul id="res"></ul>
+</section>
+
+<section class="panel best" aria-label="Best 10">
+<h2>Best 10 <small id="nb">0/10</small></h2>
+<p>Your favourites, strongest at the top.</p>
+<div class="box" data-list="best" id="best"></div>
+</section>
+
+<section class="panel worst" aria-label="Worst 10">
+<h2>Worst 10 <small id="nw">0/10</small></h2>
+<p>The ones that let you down, worst at the top.</p>
+<div class="box" data-list="worst" id="worst"></div>
+</section>
+</div>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+var D={Jan:"Salliyargal|Anali|Dear Radhi|Justice for Jeni|Kaakaa|The Bed|Parasakthi|Anantha|Vaa Vaathiyaar|Thalaivar Thambi Thalaimaiyil|Draupathi 2|Hot Spot 2 Much|Jockey|Maayabimbum|Vangala Viriguda|Gandhi Talks|Granny|Karuppu Pulsar|Lockdown|Mellisai|Thiraivi",
+Feb:"Gilli Mappilai|Red Label|With Love|Yogi Da|Dream Girl|Kaa – The Forest|My Lord|Mylanji|Pookie|Sweety Naughty Crazy|Therincha Kadhalinga|L.S.S: Love Subscribe Share|Lucky the Superstar|MG24|My Dear Dolly|Siva Sambo|Arivaan|Aazhi|Fourth Floor|Thaai Kizhavi",
+Mar:"99/66|Chellamada Nee Enakku|Kadhal Reset Repeat|Mustafa Mustafa|Oh Butterfly|Vadam|Vasool Mannan|Yaarra Andha Paiyan Naan Dhan Andha Paiyan|Made in Korea|Anthony|Kenatha Kanom|Kolaiseval|Police Family|Vengeance|Vowels|Youth|Happy Raj|Nee Forever|Satan – The Dark",
+Apr:"Kaalidas 2|Leader|Neelira|Carmeni Selvam|Guest|Love Insurance Kompany|TN 2026|Manithan Deivamagalam|Mr. X|Battle|Breakfast|Commando Vin Love Story|Theeyor Koodam|Kara",
+May:"29|Day 11|Karuppu|Sattendru Maarudhu Vaanilai|Blast",
+Jun:"Parimala and Co|Sannidhanam P.O|Charukesi|Habeebi|Double Occupancy|Nizhal|Moondram Kan|Valluvan|Dark Giant|Nooru Saami|Ananthan Kaadu|Heartin|Angikaaram|Con City",
+Jul:"Dark|Gatta Kusthi 2|Idhayam Murali|Lakshmikanthan Kolai Vazhakku|Love Oh Love|Anbe Diana|Arulvaan|Jana Nayagan",
+Aug:"DC|G.D.N|Photographer|Magudam|Vishwanath & Sons|Modha Rathri|Pyaar Prema Kalyanam|Ram and Leela|Hi|Once More",
+Sep:"Immortal|Mandaadi|Sardar 2|Enna Vilai|Sandakari|Beep|Paavai|The Dark Heaven|Dorothy|Lenin Pandiyan|Meesaya Murukku 2|The Grand Master",
+Oct:"Baththa|Yezhu Kadal Yezhu Malai|Anbil Avan|Sigma|Jailer 2|Appa Kutty|Irandu Vaanam",
+Nov:"Mookuthi Amman 2|Moonwalk|Scene|Om|Sathyavan Savithiri"};
+var F=[];Object.keys(D).forEach(function(m){D[m].split("|").forEach(function(t){F.push({id:F.length,t:t,m:m,k:norm(t)})})});
+function norm(s){return s.toLowerCase().replace(/[^a-z0-9]+/g," ").trim()}
+function esc(s){return s.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+var $=function(s){return document.querySelector(s)};
+var MAX=10,KEY="tamil2026-rank",S={best:[],worst:[]};
+var SITE="Tamil Cinema 2026: Your Best and Worst 10",SURL=(/^https?:$/.test(location.protocol)&&!/claude/.test(location.hostname))?location.origin+"/":"https://claude.ai/artifact/1aajzJW2nv2xKpAf93PYrx";
+var P={"Jana Nayagan":"ZEE5","Vishwanath & Sons":"Netflix","Jailer 2":"Prime Video","The Grand Master":"Sun NXT","Gandhi Talks":"ZEE5","Dear Radhi":"Sun NXT","Lucky the Superstar":"JioHotstar","Hot Spot 2 Much":"Prime Video","Love Oh Love":"Prime Video","TN 2026":"Prime Video","Manithan Deivamagalam":"Sun NXT"};
+var BASE=F.length;
+try{JSON.parse(localStorage.getItem(KEY+"-custom")||"[]").slice(0,50).forEach(function(t){if(typeof t=="string")F.push({id:F.length,t:t.slice(0,60),m:"Added",k:norm(t),c:true})})}catch(e){}
+function saveC(){try{localStorage.setItem(KEY+"-custom",JSON.stringify(F.slice(BASE).map(function(f){return f.t})))}catch(e){}}
+function addBtn(){var v=$("#q").value.trim();return v?'<li class="hint">Film missing? <button class="chip" data-custom="1">Add “'+esc(v.slice(0,60))+'” as a new film</button></li>':''}
+try{var raw=JSON.parse(localStorage.getItem(KEY)||"null");if(raw){["best","worst"].forEach(function(l){S[l]=(raw[l]||[]).filter(function(i){return F[i]}).slice(0,MAX)})}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function where(id){var b=S.best.indexOf(id);if(b>-1)return["Best",b+1];var w=S.worst.indexOf(id);if(w>-1)return["Worst",w+1];return null}
+var tt;function toast(m){var t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("on")},2200)}
+
+function renderRes(){
+var q=norm($("#q").value),ul=$("#res");
+$("#cnt").textContent=F.length+" films";
+if(!q){ul.innerHTML='<li class="hint">Start typing to find a film. '+F.length+' Tamil releases from January to November are searchable.</li>';return}
+var m=F.filter(function(f){return f.k.indexOf(q)>-1}).sort(function(a,b){return (b.k.indexOf(q)===0)-(a.k.indexOf(q)===0)||a.t.localeCompare(b.t)});
+if(!m.length){ul.innerHTML='<li class="empty">No film matches “'+esc($("#q").value)+'”. Check the spelling or try a shorter word.</li>'+addBtn();return}
+var h=m.slice(0,25).map(function(f){var w=where(f.id);
+return '<li class="li" data-id="'+f.id+'" data-src="res"><span class="grip" title="Drag into a list" aria-hidden="true">⋮⋮</span><div class="t"><b>'+esc(f.t)+'</b><small>'+(w?'In '+w[0]+' #'+w[1]:(f.c?'Added by you':f.m+' 2026'+(P[f.t]?', on '+P[f.t]:'')))+'</small></div><div class="add"><button class="b" data-add="best" data-id="'+f.id+'"'+(w?' disabled':'')+'>Best</button><button class="w" data-add="worst" data-id="'+f.id+'"'+(w?' disabled':'')+'>Worst</button></div></li>'}).join("");
+if(m.length>25)h+='<li class="hint">'+(m.length-25)+' more. Keep typing to narrow it down.</li>';
+ul.innerHTML=h+addBtn()}
+
+function renderList(l){
+var box=$("#"+l),h="";
+for(var i=0;i<MAX;i++){var id=S[l][i];
+h+=id==null?'<div class="slot"><span>'+(i+1)+'</span>Empty</div>':'<div class="li" data-id="'+id+'" data-src="'+l+'"><span class="grip" title="Drag to reorder" aria-hidden="true">⋮⋮</span><span class="rk">'+(i+1)+'</span><div class="t"><b>'+esc(F[id].t)+'</b><small>'+(F[id].c?'Added by you':F[id].m+' 2026')+'</small></div><button class="x" data-rm="'+l+'" data-id="'+id+'" aria-label="Remove '+esc(F[id].t)+'">Remove</button></div>'}
+box.innerHTML=h;$(l=="best"?"#nb":"#nw").textContent=S[l].length+"/"+MAX}
+function render(){renderRes();renderList("best");renderList("worst")}
+
+function place(id,src,to,idx){
+var n={best:S.best.filter(function(x){return x!==id}),worst:S.worst.filter(function(x){return x!==id})};
+if(n[to].length>=MAX){toast("The "+(to=="best"?"Best":"Worst")+" list is full. Remove a film first.");return false}
+if(src===to){var o=S[to].indexOf(id);if(o>-1&&o<idx)idx--}
+if(idx<0||idx>n[to].length)idx=n[to].length;
+n[to].splice(idx,0,id);S=n;save();render();return true}
+
+document.addEventListener("click",function(e){
+var a=e.target.closest("[data-add]"),r=e.target.closest("[data-rm]");
+if(a){var id=+a.dataset.id;if(place(id,"res",a.dataset.add,-1))toast("Added to "+(a.dataset.add=="best"?"Best":"Worst")+" 10")}
+if(r){var l=r.dataset.rm,i=S[l].indexOf(+r.dataset.id);if(i>-1){S[l].splice(i,1);save();render()}}});
+
+var q=$("#q"),deb;q.addEventListener("input",function(){clearTimeout(deb);deb=setTimeout(renderRes,80)});
+
+/* Pointer-based drag: works with mouse, touch and pen */
+var drag=null;
+document.addEventListener("pointerdown",function(e){
+var g=e.target.closest(".grip");if(!g||e.button>0)return;
+var li=g.closest(".li");e.preventDefault();
+var ghost=document.createElement("div");ghost.className="ghost";ghost.textContent=F[+li.dataset.id].t;document.body.appendChild(ghost);
+li.classList.add("dragging");
+drag={id:+li.dataset.id,src:li.dataset.src,li:li,ghost:ghost,x:e.clientX,y:e.clientY,pid:e.pointerId,iv:setInterval(function(){
+if(!drag)return;var h=innerHeight;if(drag.y<70)scrollBy(0,-14);else if(drag.y>h-70)scrollBy(0,14);
+var r=$("#res");if(drag.src==="res"){}},16)};
+move(e)});
+function clear(){document.querySelectorAll(".before,.end,.over").forEach(function(n){n.classList.remove("before","end","over")})}
+function target(x,y){
+var el=document.elementFromPoint(x,y),box=el&&el.closest("[data-list]");
+if(!box){var p=el&&el.closest(".panel");if(p)box=p.querySelector("[data-list]")}
+if(!box)return null;
+var items=[].slice.call(box.querySelectorAll(".li:not(.dragging)")),idx=items.length;
+for(var i=0;i<items.length;i++){var r=items[i].getBoundingClientRect();if(y<r.top+r.height/2){idx=i;break}}
+return{box:box,list:box.dataset.list,idx:idx,items:items}}
+function move(e){
+if(!drag||e.pointerId!==drag.pid)return;
+drag.x=e.clientX;drag.y=e.clientY;
+drag.ghost.style.left=e.clientX+"px";drag.ghost.style.top=e.clientY+"px";
+clear();var t=target(e.clientX,e.clientY);
+if(t){t.box.classList.add("over");if(t.idx<t.items.length)t.items[t.idx].classList.add("before");else t.box.classList.add("end")}}
+document.addEventListener("pointermove",move);
+function finish(e,cancel){
+if(!drag||e.pointerId!==drag.pid)return;
+var d=drag;drag=null;clearInterval(d.iv);d.ghost.remove();d.li.classList.remove("dragging");
+var t=cancel?null:target(e.clientX,e.clientY);clear();
+if(t){
+/* idx counts only non-dragging items, so convert it to a position in the full list */
+var full=t.idx;
+if(d.src===t.list){var cur=S[t.list].indexOf(d.id);full=t.idx>=cur?t.idx+1:t.idx}
+place(d.id,d.src,t.list,full)}}
+document.addEventListener("pointerup",function(e){finish(e,false)});
+document.addEventListener("pointercancel",function(e){finish(e,true)});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&drag){finish({pointerId:drag.pid,clientX:-1,clientY:-1},true)}});
+
+$("#reset").addEventListener("click",function(){
+if(!S.best.length&&!S.worst.length)return;
+if(confirm("Clear both lists?")){S={best:[],worst:[]};save();render()}});
+$("#share").addEventListener("click",function(){
+var f=function(l){return S[l].map(function(id,i){return(i+1)+". "+F[id].t}).join("\n")||"(empty)"};
+var txt=SITE+"\n\nBest 10\n"+f("best")+"\n\nWorst 10\n"+f("worst")+"\n\nMake yours: "+SURL+"\nCreated by Jack";
+try{navigator.clipboard.writeText(txt).then(function(){toast("Lists copied")},function(){toast("Copy blocked. Select the lists manually.")})}catch(e){toast("Copy blocked. Select the lists manually.")}});
+function fit(x,s,w){if(x.measureText(s).width<=w)return s;while(s.length>1&&x.measureText(s+"…").width>w)s=s.slice(0,-1);return s+"…"}
+function makeImg(){
+var W=1080,H=1350,c=document.createElement("canvas");c.width=W;c.height=H;var x=c.getContext("2d");
+var ff='"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif';
+x.fillStyle="#12121f";x.fillRect(0,0,W,H);
+x.fillStyle="#f1f1fa";x.font="800 56px "+ff;x.fillText("Tamil Cinema 2026",60,104);
+x.fillStyle="#9a9dbb";x.font="600 30px "+ff;x.fillText("My best and worst 10",60,152);
+[{l:"best",t:"Best 10",c:"#3fd0a9",x:60},{l:"worst",t:"Worst 10",c:"#ff6b7f",x:560}].forEach(function(col){
+x.fillStyle=col.c;x.fillRect(col.x,196,460,8);
+x.font="800 40px "+ff;x.fillText(col.t,col.x,260);
+for(var i=0;i<MAX;i++){var y=330+i*80,id=S[col.l][i];
+x.fillStyle=col.c;x.font="800 32px "+ff;x.fillText(String(i+1),col.x,y);
+x.font="600 30px "+ff;
+if(id==null){x.fillStyle="#4a4c6a";x.fillText("—",col.x+56,y)}else{x.fillStyle="#f1f1fa";x.fillText(fit(x,F[id].t,400),col.x+56,y)}}});
+x.fillStyle="#33344f";x.fillRect(60,1170,960,2);
+x.fillStyle="#ffc83d";x.font="800 36px "+ff;x.fillText(SITE,60,1232);
+x.fillStyle="#f1f1fa";x.font="600 28px "+ff;x.fillText(SURL,60,1280);
+x.fillStyle="#9a9dbb";x.font="600 24px "+ff;x.fillText("Created by Jack",60,1322);
+return c}
+function showImg(){
+var c=makeImg(),url=c.toDataURL("image/png");
+var ov=document.createElement("div");ov.className="ov";
+ov.innerHTML='<img alt="Your best and worst 10 Tamil films of 2026" src="'+url+'"><div class="row"><button class="btn pri" id="ci">Copy image</button><button class="btn" id="cl">Close</button></div><p>If copying is blocked, press and hold the image to save it.</p>';
+document.body.appendChild(ov);
+ov.querySelector("#cl").onclick=function(){ov.remove()};
+ov.addEventListener("click",function(e){if(e.target===ov)ov.remove()});
+ov.querySelector("#ci").onclick=function(){
+c.toBlob(function(b){
+try{navigator.clipboard.write([new ClipboardItem({"image/png":b})]).then(function(){toast("Image copied. Paste it into your post.")},function(){toast("Copy blocked. Press and hold the image to save.")})}catch(e){toast("Copy blocked. Press and hold the image to save.")}},"image/png")}}
+$("#img").addEventListener("click",function(){
+var go=function(){showImg()};
+try{document.fonts.load('800 56px "Bricolage Grotesque"').then(go,go)}catch(e){go()}});
+function addCustom(){var v=$("#q").value.trim().replace(/\s+/g," ").slice(0,60);if(!v)return;
+var ex=F.filter(function(f){return f.k===norm(v)})[0];if(ex){toast("Already listed: "+ex.t);return}
+F.push({id:F.length,t:v,m:"Added",k:norm(v),c:true});saveC();renderRes();toast("Film added. Now tap Best or Worst.")}
+document.addEventListener("click",function(e){if(e.target.closest("[data-custom]"))addCustom()});
+$("#tw").addEventListener("click",function(){
+if(!S.best.length){toast("Add films to your Best 10 first.");return}
+var t="My top Tamil films of 2026:\n"+S.best.slice(0,3).map(function(id,i){return(i+1)+". "+F[id].t}).join("\n")+"\n\nMake your Best and Worst 10:";
+var u="https://twitter.com/intent/tweet?text="+encodeURIComponent(t)+"&url="+encodeURIComponent(SURL);
+var w=window.open(u,"_blank","noopener");toast(w?"Opened X. Paste your copied image into the post.":"Pop-up blocked. Allow pop-ups and try again.")});
+$("#theme").addEventListener("click",function(){
+var r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches;
+r.dataset.theme=dark?"light":"dark";try{localStorage.setItem(KEY+"-theme",r.dataset.theme)}catch(e){}});
+try{var th=localStorage.getItem(KEY+"-theme");if(th)document.documentElement.dataset.theme=th}catch(e){}
+var MN={Jan:"January",Feb:"February",Mar:"March",Apr:"April",May:"May",Jun:"June",Jul:"July",Aug:"August",Sep:"September",Oct:"October",Nov:"November"};
+var br=document.createElement("section");br.className="panel browse";br.setAttribute("aria-label","All films by month");
+var bh='<h2>All films by month <small>'+F.length+' films</small></h2><p>Can’t remember the exact title? Scan the months, then tap a film to search for it.</p>';
+Object.keys(D).forEach(function(m){var fs=F.filter(function(f){return f.m===m});
+bh+='<details open><summary>'+MN[m]+'<small>'+fs.length+'</small></summary><div class="chips">'+fs.map(function(f){return '<button class="chip" data-pick="'+f.id+'">'+esc(f.t)+'</button>'}).join("")+'</div></details>'});
+br.innerHTML=bh;document.querySelector(".wrap").appendChild(br);
+br.addEventListener("click",function(e){var c=e.target.closest("[data-pick]");if(!c)return;
+q.value=F[+c.dataset.pick].t;renderRes();q.scrollIntoView({behavior:"smooth",block:"center"})});
+var com=document.createElement("section");com.className="panel com";com.hidden=true;com.setAttribute("aria-label","Community picks");
+document.querySelector(".wrap").insertBefore(com,br);
+function ol(a){return a.length?'<ol>'+a.map(function(x){return'<li>'+esc(x.t)+'<b>'+x.c+'</b></li>'}).join("")+'</ol>':'<p class="hint">No picks yet.</p>'}
+function loadCom(){fetch("/api/votes").then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
+com.innerHTML='<h2>Community picks <small>'+d.n+' '+(d.n==1?'person has':'people have')+' submitted</small></h2><p>The films most often placed in the Best and Worst lists. Counts update about once a minute.</p><div class="cols"><div><h3>Most picked as best</h3>'+ol(d.best)+'</div><div><h3>Most picked as worst</h3>'+ol(d.worst)+'</div></div>';com.hidden=false}).catch(function(){})}
+function did(){try{var d=localStorage.getItem(KEY+"-did");if(!d){d=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem(KEY+"-did",d)}return d}catch(e){return"x"+Math.random().toString(36).slice(2)}}
+$("#sub").addEventListener("click",function(){
+if(!S.best.length&&!S.worst.length){toast("Add some films first.");return}
+var t=function(id){return F[id].t};
+fetch("/api/votes",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:did(),best:S.best.map(t),worst:S.worst.map(t)})}).then(function(r){if(!r.ok)throw 0;toast("Submitted. Thanks for voting!");loadCom()}).catch(function(){toast("Couldn’t submit right now. Try again later.")})});
+loadCom();
+render();
+})();
+</script>
+</body>
+</html>
