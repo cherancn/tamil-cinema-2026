@@ -4,6 +4,12 @@ import { createHash, timingSafeEqual } from "node:crypto";
 // One function serves both the voting API and the shared film list.
 export const config = { path: ["/api/votes", "/api/films"] };
 
+const LANGS = ["ta", "te", "ml", "kn", "hi", "en"];
+// Tamil keeps the original key names so earlier votes and films stay put.
+const keys = (lang) => {
+  const p = lang === "ta" ? "" : lang + "-";
+  return { vote: p + "v-", totals: p + "totals", films: p + "films" };
+};
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const MAX_FILMS = 1000;      // total user-added films kept
 const PER_DEVICE_DAY = 5;    // adds per device per day
@@ -61,9 +67,9 @@ const emptyFilms = () => ({ films: [], hidden: [] });
 
 // Builds totals from every saved vote. Used once to pick up votes made
 // before running totals existed, and from the admin page as a repair.
-async function recount(s, onlyIfMissing) {
+async function recount(s, K, onlyIfMissing) {
   const t = emptyTotals();
-  for await (const page of s.list({ prefix: "v-", paginate: true })) {
+  for await (const page of s.list({ prefix: K.vote, paginate: true })) {
     for (const b of page.blobs) {
       const v = await s.get(b.key, { type: "json" });
       if (!v) continue;
@@ -71,13 +77,13 @@ async function recount(s, onlyIfMissing) {
     }
   }
   if (onlyIfMissing) {
-    const res = await s.setJSON("totals", t, { onlyIfNew: true });
-    if (!res.modified) return await s.get("totals", { type: "json" });
-  } else await s.setJSON("totals", t);
+    const res = await s.setJSON(K.totals, t, { onlyIfNew: true });
+    if (!res.modified) return await s.get(K.totals, { type: "json" });
+  } else await s.setJSON(K.totals, t);
   return t;
 }
-async function totals(s) {
-  return (await s.get("totals", { type: "json" })) || (await recount(s, true));
+async function totals(s, K) {
+  return (await s.get(K.totals, { type: "json" })) || (await recount(s, K, true));
 }
 
 function isAdmin(req) {
@@ -88,9 +94,9 @@ function isAdmin(req) {
   return timingSafeEqual(a, b);
 }
 
-async function votes(req, s) {
+async function votes(req, s, K) {
   if (req.method === "GET") {
-    const [t, f] = await Promise.all([totals(s), s.get("films", { type: "json" })]);
+    const [t, f] = await Promise.all([totals(s, K), s.get(K.films, { type: "json" })]);
     const hidden = new Set((f && f.hidden) || []);
     const top = (o) => Object.entries(o)
       .filter(([k]) => !hidden.has(k))
@@ -107,11 +113,11 @@ async function votes(req, s) {
     if (typeof body.id !== "string" || !/^[a-z0-9]{6,64}$/i.test(body.id)) return err("Bad id");
     const best = cleanList(body.best), worst = cleanList(body.worst);
     if (!best.length && !worst.length) return err("Empty");
-    await totals(s); // make sure older votes are counted before adding diffs
-    const key = "v-" + body.id.toLowerCase();
+    await totals(s, K); // make sure older votes are counted before adding diffs
+    const key = K.vote + body.id.toLowerCase();
     const prev = await s.get(key, { type: "json" });
     await s.setJSON(key, { best, worst, t: Date.now() });
-    await update(s, "totals", (t) => {
+    await update(s, K.totals, (t) => {
       if (prev) { bump(t.best, prev.best, -1); bump(t.worst, prev.worst, -1); } else t.n++;
       bump(t.best, best, 1); bump(t.worst, worst, 1);
       return t;
@@ -121,10 +127,10 @@ async function votes(req, s) {
   return err("Method not allowed", 405);
 }
 
-async function films(req, s, ctx) {
+async function films(req, s, ctx, K) {
   const admin = isAdmin(req);
   if (req.method === "GET") {
-    const f = (await s.get("films", { type: "json" })) || emptyFilms();
+    const f = (await s.get(K.films, { type: "json" })) || emptyFilms();
     if (admin && new URL(req.url).searchParams.has("admin")) return json(f);
     return json({ films: f.films.map(({ t, m, k }) => ({ t, m, k })) });
   }
@@ -137,10 +143,10 @@ async function films(req, s, ctx) {
   if (body.action) {
     if (!admin) return err("Wrong admin password", 401);
     if (body.action === "check") return json({ ok: true });
-    if (body.action === "recount") { const t = await recount(s); return json({ ok: true, n: t.n }); }
+    if (body.action === "recount") { const t = await recount(s, K); return json({ ok: true, n: t.n }); }
     const k = norm(body.k || "");
     if (!k) return err("Missing film");
-    const out = await update(s, "films", (f) => {
+    const out = await update(s, K.films, (f) => {
       if (body.action === "delete") {
         f.films = f.films.filter((x) => x.k !== k);
         if (!f.hidden.includes(k)) f.hidden.push(k);
@@ -160,7 +166,7 @@ async function films(req, s, ctx) {
   const dev = hash(body.id.toLowerCase()), ip = hash((ctx && ctx.ip) || "none"), day = today();
 
   let result;
-  await update(s, "films", (f) => {
+  await update(s, K.films, (f) => {
     const ex = f.films.find((x) => x.k === k);
     if (ex) { result = { ok: true, film: { t: ex.t, m: ex.m, k: ex.k }, existed: true }; return undefined; }
     if (f.hidden.includes(k)) { result = { status: 403, error: "This film name was removed by the site owner." }; return undefined; }
@@ -181,7 +187,11 @@ async function films(req, s, ctx) {
 export default async (req, ctx) => {
   const s = store();
   try {
-    return new URL(req.url).pathname.startsWith("/api/films") ? await films(req, s, ctx) : await votes(req, s);
+    const url = new URL(req.url);
+    const lang = url.searchParams.get("lang") || "ta";
+    if (!LANGS.includes(lang)) return err("Unknown language");
+    const K = keys(lang);
+    return url.pathname.startsWith("/api/films") ? await films(req, s, ctx, K) : await votes(req, s, K);
   } catch (e) {
     console.error(e);
     return err(e && e.message === "busy" ? "Busy, try again." : "Server error", 503);
